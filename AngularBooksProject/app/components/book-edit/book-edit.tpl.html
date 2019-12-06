@@ -1,0 +1,160 @@
+<div class="div-wrapper" ng-show="$ctrl.book==null">
+  <h2>{{ $ctrl.bookId }} numaralı kitap <b>bulunamadı!</b></h2>
+  <br />
+</div>
+<div class="div-wrapper" ng-hide="$ctrl.book==null">
+  <h2>
+    Kitap <b>{{ $ctrl.title }}</b>
+  </h2>
+  <br />
+  <form name="form" ng-submit="$ctrl.save(form.$valid)">
+    <div class="row">
+      <div class="form-group" ng-class="{'has-error': !form.isbn.$valid}">
+        <label class="control-label col-sm-2" for="isbn">ISBN:</label>
+        <div class="col-sm-5">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="$ctrl.book.isbn"
+            name="isbn"
+            id="isbn"
+            placeholder="ISBN numarasını girin"
+            ng-pattern="/^\d{9}[\d|X]$/"
+            required
+          />
+        </div>
+        <div
+          ng-messages="form.isbn.$error"
+          class="col-sm-5 error"
+          ng-show="form.isbn.$touched"
+          role="alert"
+        >
+          <div ng-message="required">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Isbn alanı boş olamaz
+          </div>
+          <div ng-message="pattern">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Isbn kurallara uygun şekilde girilmedi
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group" ng-class="{'has-error': !form.name.$valid}">
+        <label class="control-label col-sm-2" for="name">Kitap Adı:</label>
+        <div class="col-sm-5">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="$ctrl.book.name"
+            id="name"
+            name="name"
+            placeholder="Kitap adı girin"
+            required
+          />
+        </div>
+        <div
+          ng-messages="form.name.$error"
+          class="col-sm-5 error"
+          ng-show="form.name.$touched"
+          role="alert"
+        >
+          <div ng-message="required">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Kitap adı alanı boş olamaz
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group" ng-class="{'has-error': !form.writer.$valid}">
+        <label class="control-label col-sm-2" for="writer">Yazar:</label>
+        <div class="col-sm-5">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="$ctrl.book.writer"
+            id="writer"
+            name="writer"
+            placeholder="Yazar girin"
+            required
+          />
+        </div>
+        <div
+          ng-messages="form.writer.$error"
+          class="col-sm-5 error"
+          ng-show="form.writer.$touched"
+          role="alert"
+        >
+          <div ng-message="required">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Yazar alanı boş olamaz
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group" ng-class="{'has-error': !form.publisher.$valid}">
+        <label class="control-label col-sm-2" for="publisher">Yayınevi:</label>
+        <div class="col-sm-5">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="$ctrl.book.publisher"
+            id="publisher"
+            name="publisher"
+            placeholder="Yayınevi girin"
+            required
+          />
+        </div>
+        <div
+          ng-messages="form.publisher.$error"
+          class="col-sm-5 error"
+          ng-show="form.publisher.$touched"
+          role="alert"
+        >
+          <div ng-message="required">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Yayınevi alanı boş olamaz
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-hide="$ctrl.isNew">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="createdat"></label>
+        <div class="col-sm-10">
+          <span class="text-dark" id="createdat"
+            >Bu kitap {{ $ctrl.book.createdAt | date: "dd.MM.y" }} tarihinde
+            eklendi.</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-sm-2">
+          <button
+            type="submit"
+            ng-click="$ctrl.goBack()"
+            class="btn btn-primary"
+          >
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i> Listeye
+            Dön
+          </button>
+        </div>
+        <div class="col-sm-offset-3 col-sm-5">
+          <button
+            type="submit"
+            class="btn btn-success"
+            ng-disabled="!form.$valid"
+          >
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Kitabı
+            {{ $ctrl.title }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

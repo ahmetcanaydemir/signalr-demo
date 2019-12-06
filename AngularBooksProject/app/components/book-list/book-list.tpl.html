@@ -1,0 +1,104 @@
+<div class="table-wrapper">
+  <div class="table-title">
+    <h2>Kitap <b>Listesi</b></h2>
+    <br />
+    <div class="row">
+      <div class="col-sm-6">
+        Ara: <input class="form-control" ng-model="$ctrl.query" />
+      </div>
+      <div class="col-sm-4">
+        Sırala:
+        <select class="form-control" ng-model="$ctrl.orderProp">
+          <option value="Isbn">Isbn</option>
+          <option value="Name">Ad</option>
+          <option value="Writer">Yazar</option>
+          <option value="Publisher">Yayınevi</option>
+          <option value="CreatedAt">Eklenme Tarihi</option>
+        </select>
+      </div>
+      <div class="col-sm-2">
+        <a href="#!/kitaplar/yeni"
+          ><button type="button" class="btn btn-info add-new">
+            <i class="fa fa-plus"></i> Yeni Ekle
+          </button></a
+        >
+      </div>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th ng-click="$ctrl.sortBy('Isbn')">
+          Isbn
+          <span
+            class="sortorder"
+            ng-show="$ctrl.orderProp === 'Isbn'"
+            ng-class="{reverse: $ctrl.reverse}"
+          ></span>
+        </th>
+        <th ng-click="$ctrl.sortBy('Name')">
+          Ad
+          <span
+            class="sortorder"
+            ng-show="$ctrl.orderProp === 'Name'"
+            ng-class="{reverse: $ctrl.reverse}"
+          ></span>
+        </th>
+        <th ng-click="$ctrl.sortBy('Writer')">
+          Yazar
+          <span
+            class="sortorder"
+            ng-show="$ctrl.orderProp === 'Writer'"
+            ng-class="{reverse: $ctrl.reverse}"
+          ></span>
+        </th>
+        <th ng-click="$ctrl.sortBy('Publisher')">
+          Yayınevi
+          <span
+            class="sortorder"
+            ng-show="$ctrl.orderProp === 'Publisher'"
+            ng-class="{reverse: $ctrl.reverse}"
+          ></span>
+        </th>
+        <th ng-click="$ctrl.sortBy('CreatedAt')">
+          Tarih
+          <span
+            class="sortorder"
+            ng-show="$ctrl.orderProp === 'CreatedAt'"
+            ng-class="{reverse: $ctrl.reverse}"
+          ></span>
+        </th>
+        <th>İşlemler</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        ng-repeat="book in $ctrl.books | filter:$ctrl.query | orderBy:$ctrl.orderProp:$ctrl.reverse"
+      >
+        <td>
+          <a href="#!/kitaplar/{{ book.id }}">{{ book.isbn }}</a>
+        </td>
+        <td>{{ book.name }}</td>
+        <td>{{ book.writer }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>{{ book.createdAt | date: "dd.MM.y" }}</td>
+        <td>
+          <a
+            href="#!/kitaplar/{{ book.id }}"
+            class="edit"
+            title="Düzenle"
+            data-toggle="tooltip"
+            ><i class="fa fa-edit"></i
+          ></a>
+          <a
+            ng-click="$ctrl.delete(book)"
+            class="delete"
+            title="Sil"
+            data-toggle="tooltip"
+            ><i class="fa fa-trash"></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
