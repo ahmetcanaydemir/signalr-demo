@@ -12,9 +12,9 @@ namespace CoreWebAPI.Controllers
     public class BooksController : ControllerBase
     {
         readonly IRepository<Book> _bookService;
-        public BooksController()
+        public BooksController(IHubContext<Hubs.BookHub> hubContext)
         {
-            _bookService = new BookRepository();
+            _bookService = new BookRepository(hubContext);
         }
         [HttpGet]
         public IEnumerable<Book> Get()

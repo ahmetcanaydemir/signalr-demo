@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoreWebAPI.Models;
+using Microsoft.AspNetCore.SignalR;
 using NHibernate;
 
 namespace CoreWebAPI.DAL
@@ -8,9 +9,9 @@ namespace CoreWebAPI.DAL
     public class BookRepository : IRepository<Book>
     {
         readonly SessionFactory sessionFactory;
-        public BookRepository()
+        public BookRepository(IHubContext<Hubs.BookHub> hubContext)
         {
-            sessionFactory = new SessionFactory();
+            sessionFactory = new SessionFactory(hubContext);
         }
         public void Delete(object bookId)
         {

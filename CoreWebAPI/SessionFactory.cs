@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using Microsoft.AspNetCore.SignalR;
 using NHibernate;
 using System;
 using System.IO;
@@ -11,8 +12,10 @@ namespace CoreWebAPI
         private readonly object _lockObject = new object();
         private ISessionFactory _sessionFactory;
 
-        public SessionFactory()
+        private IHubContext<Hubs.BookHub> _hubContext;
+        public SessionFactory(IHubContext<Hubs.BookHub> hubContext)
         {
+            _hubContext = hubContext;
         }
 
         private ISessionFactory BuildSessionFactory
@@ -27,7 +30,7 @@ namespace CoreWebAPI
 
         public ISession OpenSession()
         {
-            return BuildSessionFactory.WithOptions().OpenSession();
+            return BuildSessionFactory.WithOptions().Interceptor(new DAL.BookInterceptor(_hubContext)).OpenSession();
         }
 
         private void CreateSessionFactory()
