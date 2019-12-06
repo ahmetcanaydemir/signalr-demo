@@ -18,6 +18,7 @@ namespace CoreWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder
@@ -40,6 +41,7 @@ namespace CoreWebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<Hubs.BookHub>("/bookHub");
             });
         }
     }
