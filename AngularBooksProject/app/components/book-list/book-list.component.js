@@ -1,12 +1,24 @@
 import {API_URL} from "./../../settings";
 import Template from "./book-list.tpl.html";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 class BookListComponent {
   constructor(BookService) {
     this.BookService = BookService;
 
     // <-- SignalR bölümü başlangıcı
+    const connection = new HubConnectionBuilder()
+      .withUrl(API_URL+"/bookHub")
+      .build();
 
+      connection.start().then(()=>{
+        console.log("websocket bağlantısı sağlandı.");
+      });
+
+      connection.on("GetData", data=>{
+        console.log("GetData tetiklendi.");
+        BookService.getAll().then(response => (this.books = response.data));
+      });
     // SignalR bölümü bitişi --->
 
     BookService.getAll().then(response => (this.books = response.data));
