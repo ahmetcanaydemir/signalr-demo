@@ -8,7 +8,6 @@ _Gereksinim ismine tıklayarak indirme sayfalarına ulaşabilirsiniz._
 ### Projenin İndirilmesi
 1) `git clone https://github.com/ahmetcanaydemir/signalr-demo.git` komutu ile projeyi indirin.
 2) `cd signalr-demo` komutu ile proje klasörüne girin.
-3) İndirdiğiniz proje klasörüne girdikten sonra `git checkout step-1 -f` komutu ile 1. adım branch'ine geçin.
 
 ### Web API Projesinin Çalıştırılması
 1) `cd CoreWebApi` ile `CoreWebAPI` klasörüne girin.
