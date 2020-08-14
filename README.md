@@ -1,5 +1,5 @@
 ### Ön Gereksinimler
-1) [ASP.NET Core 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+1) [ASP.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 2) [Git](https://git-scm.com/downloads)
 
 _Gereksinim ismine tıklayarak indirme sayfalarına ulaşabilirsiniz._
